@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  ch_my:
+    image: mysql:8.0.28
+    container_name: ch_my
+    networks:
+      - ch_local
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+    ports:
+      - 3306:3306
+    volumes:
+      - ./db/:/var/lib/mysql
+
+  ch_adm:
+    image: adminer:latest
+    container_name: ch_adm
+    networks:
+      - ch_local
+    ports:
+      - 8080:8080
+
+networks:
+  ch_local:

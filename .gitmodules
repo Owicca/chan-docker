@@ -1,0 +1,3 @@
+[submodule "chan"]
+	path = app
+	url = git@github.com:Owicca/chan.git
