@@ -1,23 +1,20 @@
-fl=-f ./container.yml
+all: up
 
-
-all: dev_up
-
-dev_up:
-	sudo docker-compose $(fl) up --force-recreate -d
-	make dev_status
+up:
+	sudo docker-compose up --force-recreate -d
+	make status
 	cd app && make dev_reload
 
-dev_start:
-	sudo docker-compose $(fl) restart
-	make dev_status
+start:
+	sudo docker-compose restart
+	make status
 	cd app && make dev_reload
 
-dev_stop:
-	sudo docker-compose $(fl) stop
+stop:
+	sudo docker-compose stop
 
-dev_down:
-	sudo docker-compose $(fl) down --remove-orphans
+down:
+	sudo docker-compose down --remove-orphans
 
-dev_status:
-	sudo docker-compose $(fl) ps
+status:
+	sudo docker-compose ps
