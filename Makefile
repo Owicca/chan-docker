@@ -6,8 +6,8 @@ up:
 	cd app && make dev_reload
 
 start:
-	sudo docker-compose restart
-	make status
+	#sudo docker-compose restart
+	#make status
 	cd app && make dev_reload
 
 stop:
