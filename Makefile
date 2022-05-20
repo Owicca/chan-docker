@@ -18,3 +18,11 @@ down:
 
 status:
 	sudo docker-compose ps
+
+clean_media:
+	-rm app/static/media/*.png
+	-rm app/static/media/*.jpg
+	-rm app/static/media/*.jpeg
+	-rm app/static/media/*.webp
+	-rm app/static/media/*.mp4
+	-rm app/static/media/*.webm
