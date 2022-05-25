@@ -1,1 +1,4 @@
 /db/
+
+/config/nginx/ssl/*
+!/config/nginx/ssl/.gitkeep
