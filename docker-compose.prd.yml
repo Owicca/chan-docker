@@ -1,0 +1,56 @@
+version: "3.8"
+
+services:
+  ch_my:
+    image: mysql:8.0.28
+    container_name: ch_my
+    networks:
+      - ch_net
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+    ports:
+      - 127.0.0.1:3306:3306
+    volumes:
+      - ./db/:/var/lib/mysql
+
+  ch_adm:
+    image: adminer:latest
+    container_name: ch_adm
+    networks:
+      - ch_net
+    ports:
+      - 127.0.0.1:8080:8080
+    depends_on:
+      - ch_my
+
+  ch_app:
+    build:
+      context: ./config/go/
+      dockerfile: Dockerfile
+    container_name: ch_app
+    networks:
+      - ch_net
+    ports:
+      - 127.0.0.1:5901:5901
+    volumes:
+      - ./app/:/app/
+    depends_on:
+      - ch_my
+
+  ch_ng:
+    build:
+      context: ./config/nginx/
+      dockerfile: Dockerfile
+    container_name: ch_ng
+    networks:
+      - ch_net
+    ports:
+      - 0.0.0.0:80:80
+    volumes:
+      - ./app/static:/usr/share/nginx/html/static/
+      - ./config/nginx:/etc/nginx/conf.d/
+    depends_on:
+      - ch_app
+
+networks:
+  ch_net:

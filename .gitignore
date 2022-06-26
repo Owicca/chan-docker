@@ -2,3 +2,4 @@
 
 /config/nginx/ssl/*
 !/config/nginx/ssl/.gitkeep
+/.env
