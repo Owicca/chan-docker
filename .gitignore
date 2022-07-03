@@ -1,4 +1,6 @@
 /db/
+/ng/logs/*
+!/ng/logs/.gitkeep
 
 /config/nginx/ssl/*
 !/config/nginx/ssl/.gitkeep
