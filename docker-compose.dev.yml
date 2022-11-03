@@ -38,7 +38,7 @@ services:
     volumes:
       - ./app/:/app/
     depends_on:
-      - ch_my
+      - ch_ma
 
   ch_ng:
     build:

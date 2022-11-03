@@ -2,12 +2,12 @@ all: up
 
 up:
 	sudo docker compose up --force-recreate --remove-orphans -d
-	make status
+	make ps
 	sudo docker logs -f ch_app
 
 start:
 	sudo docker compose restart
-	make status
+	make ps
 	sudo docker logs -f ch_app
 
 stop:
@@ -16,5 +16,5 @@ stop:
 down:
 	sudo docker compose down --remove-orphans
 
-status:
+ps:
 	sudo docker compose ps
