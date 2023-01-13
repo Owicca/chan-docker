@@ -22,7 +22,7 @@ services:
     networks:
       - ch_net
     ports:
-      - 127.0.0.1:8080:8080
+      - 127.0.0.1:5903:8080
     depends_on:
       - ch_ma
 
