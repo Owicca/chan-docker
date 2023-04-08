@@ -1,0 +1,28 @@
+#!/usr/bin/env python3
+import sys
+import subprocess
+
+
+PREFIX = "ch"
+
+if len(sys.argv) < 2:
+    print(f"[USAGE]: {sys.argv[0]} <task_name>")
+    sys.exit(1)
+
+task = sys.argv[1]
+def c(cmd: str):
+    return subprocess.run(cmd, shell=True)
+
+if task == "up":
+    c(f"docker compose up -d --build --force-recreate --remove-orphans")
+    c(f"docker compose ps")
+elif task == "start":
+    c(f"docker compose restart")
+    c(f"docker compose ps")
+elif task == "stop":
+    c(f"docker compose stop")
+    c(f"docker compose ps")
+elif task == "stats":
+    c(f"docker ps -q --filter \"name={PREFIX}_*\" | xargs docker stats")
+elif task == "ps":
+    c(f"docker compose ps")
