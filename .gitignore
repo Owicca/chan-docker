@@ -5,3 +5,8 @@
 /config/nginx/ssl/*
 !/config/nginx/ssl/.gitkeep
 /.env
+/docker-compose.override.yml
+
+/data/db/
+/data/chan/
+/data/logs/

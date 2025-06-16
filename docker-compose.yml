@@ -1,0 +1,49 @@
+services:
+  ch-ma:
+    image: mariadb:11.8.2
+    container_name: ch-ma
+    networks:
+      - ch-net
+    environment:
+      MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
+      MYSQL_DATABASE: "${DB_DATABASE}"
+      MYSQL_USER: "${DB_USER}"
+      MYSQL_PASSWORD: "${DB_PASSWORD}"
+    ports:
+      - ${DB_HOST}:${DB_PORT}:3306
+    volumes:
+      - ./data/db/:/var/lib/mysql
+
+  ch-chan:
+    build:
+      context: ./config/chan/
+      dockerfile: Dockerfile.prd
+    container_name: ch-chan
+    networks:
+      - ch-net
+    ports:
+      - ${CHAN_HOST}:${CHAN_PORT}:5901
+    volumes:
+      - ./data/chan/:/app/
+    depends_on:
+      - ch-db
+
+  ch-web:
+    build:
+      context: ./config/nginx/
+      dockerfile: Dockerfile
+    container_name: ch-web
+    networks:
+      - ch-net
+    ports:
+      - ${WEB_HOST}:${WEB_HOST_PORT_HTTP}:80
+    volumes:
+      - ./data/chan/static:/usr/share/nginx/html/static/
+      - ./config/ng:/etc/nginx/conf.d/
+      - ./data/logs/ng/:/var/log/nginx/
+    depends_on:
+      - ch-chan
+
+networks:
+  ch-net:
+    name: ch-net
