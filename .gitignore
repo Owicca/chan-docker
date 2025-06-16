@@ -1,12 +1,10 @@
-/db/
-/ng/logs/*
-!/ng/logs/.gitkeep
-
 /config/nginx/ssl/*
 !/config/nginx/ssl/.gitkeep
 /.env
 /docker-compose.override.yml
 
-/data/db/
-/data/chan/
-/data/logs/
+/data/db/*
+/data/chan/*
+
+/data/logs/*
+!/data/logs/.gitkeep
